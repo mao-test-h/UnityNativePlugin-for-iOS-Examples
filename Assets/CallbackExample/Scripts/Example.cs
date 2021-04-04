@@ -10,26 +10,21 @@ namespace CallbackExample
     /// </summary>
     sealed class Example : MonoBehaviour
     {
-        [SerializeField] Button _buttonCallDirect = default;
-        [SerializeField] Button _buttonCallInstance = default;
+        [SerializeField] Button _buttonCall = default;
 
         IntPtr _instance = IntPtr.Zero;
 
         void Start()
         {
-            // コールバックをインスタンスを経由せずに直接呼び出し
-            AddClickEvent(_buttonCallDirect, () =>
+            _buttonCall.onClick.AddListener(() =>
             {
-                // プラグインの呼び出し
-                CallSampleCallbackDirect(SampleCallback);
-            });
-
-
-            // インスタンスに登録してあるコールバックを呼び出し
-            AddClickEvent(_buttonCallInstance, () =>
-            {
+#if !UNITY_EDITOR && UNITY_IOS
                 // プラグインの呼び出し
                 CallSampleCallback(_instance);
+#else
+                // それ以外のプラットフォームからの呼び出し (Editor含む)
+                Debug.Log("iOS以外からの呼び出し");
+#endif
             });
 
 
@@ -46,19 +41,6 @@ namespace CallbackExample
             {
                 ReleaseExample(_instance);
             }
-        }
-
-        static void AddClickEvent(Button button, Action nativeEvent)
-        {
-            button.onClick.AddListener(() =>
-            {
-#if !UNITY_EDITOR && UNITY_IOS
-                nativeEvent();
-#else
-                // それ以外のプラットフォームからの呼び出し (Editor含む)
-                Debug.Log("iOS以外からの呼び出し");
-#endif
-            });
         }
 
 
@@ -84,10 +66,6 @@ namespace CallbackExample
         #region P/Invoke
 
         // ObjectiveC++コードで実装した`Example`クラスのP/Invoke
-
-        // `directCallSampleCallback`の呼び出し
-        [DllImport("__Internal", EntryPoint = "callSampleCallbackDirect")]
-        static extern int CallSampleCallbackDirect(SampleCallbackDelegate callback);
 
         // `registerSampleCallback`の呼び出し
         [DllImport("__Internal", EntryPoint = "registerSampleCallback")]

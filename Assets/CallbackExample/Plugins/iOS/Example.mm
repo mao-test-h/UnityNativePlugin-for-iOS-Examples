@@ -62,13 +62,13 @@ typedef void (* sampleCallbackDelegate)(int);
 extern "C" {
 #endif
 
-// C#から渡されるコールバックをそのまま呼び出し
-void callSampleCallbackDirect(sampleCallbackDelegate delegate) {
-    delegate(1);
-}
-
 // C#から渡されるコールバックをインスタンスに登録
 void registerSampleCallback(Example* instance, sampleCallbackDelegate delegate) {
+
+    // NOTE: こういう感じに直接呼び出すこともできる
+    //delegate(1);
+
+    // インスタンスに登録
     [instance registerSampleCallback:delegate];
 }
 
