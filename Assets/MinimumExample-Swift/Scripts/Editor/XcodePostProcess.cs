@@ -28,7 +28,7 @@ namespace MinimumExample.Editor
 
             // Swift version: 5.0
             // NOTE: 明示的に指定しないと3.0ぐらいの古いのが設定されるっぽいので、Xcodeによっては`Unspecified`扱いになる
-            project.AddBuildProperty(targetGuid, "SWIFT_VERSION", "5.0");
+            project.SetBuildProperty(targetGuid, "SWIFT_VERSION", "5.0");
 
             File.WriteAllText(projectPath, project.WriteToString());
         }
