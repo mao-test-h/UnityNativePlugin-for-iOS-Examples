@@ -22,7 +22,7 @@ namespace MinimumExample.Editor
             var project = new PBXProject();
             project.ReadFromString(File.ReadAllText(projectPath));
 
-            // 2019.3からは`UnityFramework`に分離しているので、targetGuidはこちらを指定刷る必要がある。
+            // 2019.3からは`UnityFramework`に分離しているので、targetGuidはこちらを指定する必要がある。
             // NOTE: 前バージョンと共存させたい場合には「#if UNITY_2019_3_OR_NEWER」で分けることも可能
             var targetGuid = project.GetUnityFrameworkTargetGuid();
 
