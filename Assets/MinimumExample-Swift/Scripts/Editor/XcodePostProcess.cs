@@ -6,11 +6,13 @@ using UnityEditor.iOS.Xcode;
 
 namespace MinimumExample.Editor
 {
-    sealed class XcodePostProcess
+    static class XcodePostProcess
     {
         /// <summary>
         /// Swiftを実装するにあたって必要な設定を自動で適用する
         /// </summary>
+        /// <param name="target">ビルドターゲット</param>
+        /// <param name="path">ビルド結果のパス</param>
         [PostProcessBuild]
         static void OnPostProcessBuild(BuildTarget target, string path)
         {
