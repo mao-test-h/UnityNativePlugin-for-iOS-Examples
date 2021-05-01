@@ -2,7 +2,8 @@ import Foundation
 
 // NOTE: ObjCに公開する物はアクセスレベルを`public` or `open`に設定する必要あり
 
-public class Example: NSObject {
+// ObjCに公開するクラスには`NSObject`を継承させる
+public class Example : NSObject {
 
     // ObjCに公開するメソッドには`@objc`を付ける
 
