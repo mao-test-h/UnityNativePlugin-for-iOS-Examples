@@ -1,8 +1,6 @@
 {
-    "name": "MinimumExample",
-    "references": [
-        "GUID:574b27ee23058454d84880a1d02e0a34"
-    ],
+    "name": "BatteryInfo",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
