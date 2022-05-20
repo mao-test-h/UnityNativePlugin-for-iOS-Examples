@@ -11,7 +11,7 @@ public class Example : NSObject {
     /// NOTE: ここではクラスメソッド(静的関数)として実装
     ///
     /// - Returns: 2固定
-    @objc public static func printHelloWorld() -> Int {
+    @objc public static func printHelloWorld() -> Int32 {
         // ログ出力
         print("Hello World")
 
