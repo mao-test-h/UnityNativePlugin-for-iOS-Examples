@@ -27,7 +27,10 @@ namespace MinimumExample.Editor
             var targetGuid = project.GetUnityFrameworkTargetGuid();
 
             // Swift version: 5.0
-            // NOTE: 明示的に指定しないと3.0ぐらいの古いのが設定されるっぽいので、Xcodeによっては`Unspecified`扱いになる
+            // 
+            // NOTE:
+            // Unityのバージョンによっては?生成されるxcodeprojに古いSwiftのバージョンが指定されてるせいで、
+            // 開くXcodeが新しかったりすると`Unspecified`扱いになるので一応は明示的に指定しておく
             project.SetBuildProperty(targetGuid, "SWIFT_VERSION", "5.0");
 
             File.WriteAllText(projectPath, project.WriteToString());
