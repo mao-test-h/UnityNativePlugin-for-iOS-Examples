@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,21 +29,21 @@ namespace MinimumExample
 
         #region P/Invoke
 
-        // ObjectiveC++コードで実装した`Example`クラスのP/Invoke
+        // Swiftで実装した`Example`クラスのP/Invoke
 
         /// <summary>
         /// `printHelloWorld`の呼び出し
         /// </summary>
         /// <remarks>
-        /// NOTE: Example.mmの「extern "C"」内で宣言した関数をここで呼び出す
+        /// NOTE: Example.swiftの`@_cdecl`で定義した関数をここで呼び出す
         /// - iOSのプラグインは静的に実行ファイルにリンクされるので、`DllImport`にはライブラリ名として「__Internal」を指定する必要がある
-        /// - `EntryPoint`に.mm側で宣言されている名前を渡すことでC#側のメソッド名は別名を指定可能
+        /// - `EntryPoint`にSwift側で定義されている名前を渡すことでC#側のメソッド名は別名を指定可能
         /// </remarks>
         [DllImport("__Internal", EntryPoint = "printHelloWorld")]
-        static extern int PrintHelloWorld();
+        static extern Int32 PrintHelloWorld();
 
 
-        // NOTE: ちなみに`EntryPoint`を指定しない場合は、以下のようにC#側も.mm側と同名に合わせる必要がある
+        // NOTE: ちなみに`EntryPoint`を指定しない場合は、以下のようにC#側もSwiftで定義されている関数名と同名に合わせる必要がある
         // [DllImport("__Internal")]
         // static extern int printHelloWorld();
 
