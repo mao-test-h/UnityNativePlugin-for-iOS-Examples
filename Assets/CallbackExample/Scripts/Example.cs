@@ -48,14 +48,14 @@ namespace CallbackExample
 
         // 登録するメソッド(ここで言う`SampleCallback`)と同じフォーマットのデリゲート
         // NOTE: ネイティブコード側で定義している以下の関数ポインタに対応する
-        // > typedef void (* sampleCallbackDelegate)(int);
-        delegate void SampleCallbackDelegate(int num);
+        // > typedef void (* sampleCallbackDelegate)(int32_t);
+        delegate void SampleCallbackDelegate(Int32 num);
 
 
         // 実際にネイティブコードから呼び出されるメソッド
         // NOTE: iOS(正確に言うとAOT)の場合には「staticメソッドな上で`MonoPInvokeCallbackAttribute`を付ける必要がある」
         [AOT.MonoPInvokeCallbackAttribute(typeof(SampleCallbackDelegate))]
-        static void SampleCallback(int num)
+        static void SampleCallback(Int32 num)
         {
             Debug.Log($"ネイティブコードから呼び出された : {num}");
         }
@@ -69,11 +69,11 @@ namespace CallbackExample
 
         // `registerSampleCallback`の呼び出し
         [DllImport("__Internal", EntryPoint = "registerSampleCallback")]
-        static extern int RegisterSampleCallback(IntPtr instance, SampleCallbackDelegate callback);
+        static extern void RegisterSampleCallback(IntPtr instance, SampleCallbackDelegate callback);
 
         // `callSampleCallback`の呼び出し
         [DllImport("__Internal", EntryPoint = "callSampleCallback")]
-        static extern int CallSampleCallback(IntPtr instance);
+        static extern void CallSampleCallback(IntPtr instance);
 
 
         // ネイティブコード側にあるExampleクラスのインスタンス化

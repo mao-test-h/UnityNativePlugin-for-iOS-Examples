@@ -4,7 +4,7 @@
 
 // NOTE: C#側で定義している以下のデリゲート型に対応する関数ポインタ
 // > delegate void SampleCallbackDelegate(int num);
-typedef void (* sampleCallbackDelegate)(int);
+typedef void (* sampleCallbackDelegate)(int32_t);
 
 
 // MARK:- interface (クラスの宣言部)
