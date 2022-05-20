@@ -50,7 +50,7 @@ namespace CallbackExample
         // NOTE: ネイティブコード側で定義している以下の関数ポインタに対応する
         // > typedef void (* sampleCallbackDelegate)(int32_t);
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        delegate void SampleCallbackDelegate(Int32 num);
+        delegate void SampleCallbackDelegate([MarshalAs(UnmanagedType.I4)] Int32 num);
 
 
         // 実際にネイティブコードから呼び出されるメソッド
