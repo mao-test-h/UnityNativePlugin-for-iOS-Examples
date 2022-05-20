@@ -5,10 +5,10 @@
 @interface Example : NSObject
 
 // メンバ変数に値を設定
-- (void)setMember:(int)value;
+- (void)setMember:(int32_t)value;
 
 // ログに"Hello World"と出力してメンバ変数(_member)に設定された値を返す
-- (int)printHelloWorldWithMember;
+- (int32_t)printHelloWorldWithMember;
 
 @end
 
@@ -18,7 +18,7 @@
 @implementation Example {
 
     // メンバ変数
-    int _member;
+    int32_t _member;
 }
 
 // イニシャライザ(インスタンスの初期化)
@@ -31,11 +31,11 @@
     return self;
 }
 
-- (void)setMember:(int)value {
+- (void)setMember:(int32_t)value {
     _member = value;
 }
 
-- (int)printHelloWorldWithMember {
+- (int32_t)printHelloWorldWithMember {
     // ログ出力
     NSLog(@"Hello World : [%d]", _member);
 
@@ -69,11 +69,11 @@ void releaseExample(Example* instance) {
 // 以下はインスタンスメソッドの呼び出し
 // NOTE: 第一引数にはインスタンス化した際に保持しているポインタを渡す
 
-void setMember(Example* instance, int value) {
+void setMember(Example* instance, int32_t value) {
     [instance setMember:value];
 }
 
-int printHelloWorldWithMember(Example* instance) {
+int32_t printHelloWorldWithMember(Example* instance) {
     return [instance printHelloWorldWithMember];
 }
 

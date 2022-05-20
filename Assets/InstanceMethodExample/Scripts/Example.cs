@@ -70,11 +70,11 @@ namespace InstanceMethodExample
 
         // `setMember`の呼び出し
         [DllImport("__Internal", EntryPoint = "setMember")]
-        static extern int SetMember(IntPtr instance, int value);
+        static extern void SetMember(IntPtr instance, Int32 value);
 
         // `printHelloWorldWithMember`の呼び出し
         [DllImport("__Internal", EntryPoint = "printHelloWorldWithMember")]
-        static extern int PrintHelloWorldWithMember(IntPtr instance);
+        static extern Int32 PrintHelloWorldWithMember(IntPtr instance);
 
         #endregion P/Invoke
     }
