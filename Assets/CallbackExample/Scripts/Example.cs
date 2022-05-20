@@ -49,6 +49,7 @@ namespace CallbackExample
         // 登録するメソッド(ここで言う`SampleCallback`)と同じフォーマットのデリゲート
         // NOTE: ネイティブコード側で定義している以下の関数ポインタに対応する
         // > typedef void (* sampleCallbackDelegate)(int32_t);
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         delegate void SampleCallbackDelegate(Int32 num);
 
 
@@ -69,7 +70,8 @@ namespace CallbackExample
 
         // `registerSampleCallback`の呼び出し
         [DllImport("__Internal", EntryPoint = "registerSampleCallback")]
-        static extern void RegisterSampleCallback(IntPtr instance, SampleCallbackDelegate callback);
+        static extern void RegisterSampleCallback(IntPtr instance,
+            [MarshalAs(UnmanagedType.FunctionPtr)] SampleCallbackDelegate callback);
 
         // `callSampleCallback`の呼び出し
         [DllImport("__Internal", EntryPoint = "callSampleCallback")]
