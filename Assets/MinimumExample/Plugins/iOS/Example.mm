@@ -6,7 +6,7 @@
 
 /// ログに"Hello World"と出力して2を返す。
 /// NOTE: ここではクラスメソッド(静的関数)として実装
-+ (int)printHelloWorld;
++ (int32_t)printHelloWorld;
 
 @end
 
@@ -15,7 +15,7 @@
 
 @implementation Example
 
-+ (int)printHelloWorld {
++ (int32_t)printHelloWorld {
     // ログ出力
     NSLog(@"Hello World");
 
@@ -33,7 +33,7 @@ extern "C" {
 #endif
 
 // NOTE: この関数が実際にUnity(C#)から呼び出される
-int printHelloWorld() {
+int32_t printHelloWorld() {
 
     // 上記で宣言・実装した`Example.printHelloWorld`を呼び出す。呼び出し時の構文はObjC形式となる。
     // NOTE: クラスメソッド(静的関数)として実装しているので、クラスをインスタンス化せずに直接呼び出せる

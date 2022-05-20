@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,12 +40,12 @@ namespace MinimumExample
         /// - `EntryPoint`に.mm側で宣言されている名前を渡すことでC#側のメソッド名は別名を指定可能
         /// </remarks>
         [DllImport("__Internal", EntryPoint = "printHelloWorld")]
-        static extern int PrintHelloWorld();
+        static extern Int32 PrintHelloWorld();
 
 
         // NOTE: ちなみに`EntryPoint`を指定しない場合は、以下のようにC#側も.mm側と同名に合わせる必要がある
         // [DllImport("__Internal")]
-        // static extern int printHelloWorld();
+        // static extern Int32 printHelloWorld();
 
         #endregion P/Invoke
     }
