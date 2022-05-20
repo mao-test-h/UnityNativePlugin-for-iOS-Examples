@@ -45,7 +45,7 @@ namespace MinimumExample
 
         // NOTE: ちなみに`EntryPoint`を指定しない場合は、以下のようにC#側もSwiftで定義されている関数名と同名に合わせる必要がある
         // [DllImport("__Internal")]
-        // static extern int printHelloWorld();
+        // static extern Int32 printHelloWorld();
 
         #endregion P/Invoke
     }
