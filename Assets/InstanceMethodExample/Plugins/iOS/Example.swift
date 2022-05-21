@@ -30,10 +30,10 @@ public func createExample() -> UnsafeRawPointer {
     let instance = Example()
 
     // `Unmanaged`を利用することで参照型をARC(自動参照カウント)の管理下から外すことが可能
-    // → 以下の処理は自前で参照カウンタをインクリメントしつつ、インスタンスのポインタを返している
+    // → 以下の処理は自前で参照カウンタをインクリメント(retain)しつつ、インスタンスに対応する`Unmanaged`型を取得している
     let unmanaged = Unmanaged<Example>.passRetained(instance)
 
-    // `Unmanaged.toOpaque`でOpaque pointerを取得可能
+    // `Unmanaged.toOpaque`でインスタンスの生ポインタを取得可能
     // ただし、型が`UnsafeMutableRawPointer`なので、一応は意図を明示的にするために`UnsafeRawPointer`に変換している。
     // (P/Invokeに於いてはあまり意味は無いかもだが..)
     return UnsafeRawPointer(unmanaged.toOpaque())
@@ -42,10 +42,10 @@ public func createExample() -> UnsafeRawPointer {
 // 解放
 @_cdecl("releaseExample")
 public func releaseExample(_ instancePtr: UnsafeRawPointer) {
-    // Opaque pointerは`fromOpaque`に渡すことでUnmanaged型に変換可能
+    // 生ポインタ(UnsafeRawPointer)は`fromOpaque`に渡すことでUnmanaged型に変換可能
     let unmanaged = Unmanaged<Example>.fromOpaque(instancePtr)
 
-    // `createExample()`でインクリメントした参照カウンタをデクリメントすることで解放
+    // `createExample()`でインクリメント(retain)した参照カウンタをデクリメント(release)することで解放
     unmanaged.release()
 }
 
@@ -56,7 +56,7 @@ public func releaseExample(_ instancePtr: UnsafeRawPointer) {
 public func setMember(_ instancePtr: UnsafeRawPointer, _ value: Int32) {
     // `Unmanaged<T>.takeUnretainedValue`でUnmanaged型をインスタンスに戻すことが可能
     // ここではメソッドを呼び出したいだけであり、参照カウンタはそのままで居て欲しいので`takeUnretainedValue`を利用している
-    // NOTE: 逆にインスタンスに戻す際に参照カウンタをインクリメントしたい場合には`takeRetainedValue`が使える
+    // NOTE: 逆にインスタンスに戻す際に参照カウンタをインクリメント(retain)したい場合には`takeRetainedValue`が使える
     let instance = Unmanaged<Example>.fromOpaque(instancePtr).takeUnretainedValue()
     instance.setMember(with: value)
 }
